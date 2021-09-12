@@ -36,16 +36,15 @@ class ViewController: UIViewController {
 
     @IBAction func convertDD(_ sender: UIButton) {
         
-        let ddLatitude = ddLatitudeTextField.text!
-        let ddLongitude = ddLongitudeTextField.text!
-        let floatDDLatitude = Float(ddLatitude)
-        let floatDDLongitude = Float(ddLongitude)
-        
-        if floatDDLatitude != nil, floatDDLongitude != nil {
+        if let ddLatitude = ddLatitudeTextField.text,
+           let ddLongitude = ddLongitudeTextField.text,
+           let floatDDLatitude = Float(ddLatitude),
+           let floatDDLongitude = Float(ddLongitude)
+        {
             
             //取出整數
-            let intDDLatitude = Int(floatDDLatitude!)
-            let intDDLongitude = Int(floatDDLongitude!)
+            let intDDLatitude = Int(floatDDLatitude)
+            let intDDLongitude = Int(floatDDLongitude)
             
             print("intDDLatitude = \(intDDLatitude)", "intDDLongitude = \(intDDLongitude)")
             
@@ -55,8 +54,8 @@ class ViewController: UIViewController {
             dmsLongitudeFrontTextField.text = "\(intDDLongitude)"
             
             //取小數點乘60取分
-            let ddLatitude = (floatDDLatitude! - Float(intDDLatitude)) * 60
-            let ddLongitude = (floatDDLongitude! - Float(intDDLongitude)) * 60
+            let ddLatitude = (floatDDLatitude - Float(intDDLatitude)) * 60
+            let ddLongitude = (floatDDLongitude - Float(intDDLongitude)) * 60
             
             print("ddLatitude = \(ddLatitude)", "ddLongitude = \(ddLongitude)")
             
@@ -80,14 +79,14 @@ class ViewController: UIViewController {
             dmsLatitudeBottomTextField.text = String(format: "%.2f", ddLatitude3)
             dmsLongitudeBottomTextField.text = String(format: "%.2f", ddLongitude3)
             
-            let mapLatitude = Double(floatDDLatitude!)
-            let mapLongitude = Double(floatDDLongitude!)
+            let mapLatitude = Double(floatDDLatitude)
+            let mapLongitude = Double(floatDDLongitude)
                 
             mapMKMapView.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: mapLatitude, longitude: mapLongitude), latitudinalMeters: 1000, longitudinalMeters: 1000)
-        
+    
         } else {
             
-            alert()
+            latitudeAndLongitudeNoTextAlert()
             
         }
         
@@ -97,23 +96,22 @@ class ViewController: UIViewController {
     
     @IBAction func convertDMM(_ sender: UIButton) {
         
-        let dmmFrontLatitude = dmmLatitudeFrontTextField.text!
-        let dmmBottomLatitude = dmmLatitudeBottomTextField.text!
-        let dmmFrontLongitude = dmmLongitudeFrontTextField.text!
-        let dmmBottomLongitude = dmmLongitudeBottomTextField.text!
-        let intDmmFrontLatitude = Int(dmmFrontLatitude)
-        let intDmmFrontLongitude = Int(dmmFrontLongitude)
-        let floatDmmBottomLatitude = Float(dmmBottomLatitude)
-        let floatDmmBottomLongitude = Float(dmmBottomLongitude)
-        
-        if intDmmFrontLatitude != nil, intDmmFrontLongitude != nil, floatDmmBottomLatitude != nil, floatDmmBottomLongitude != nil {
-            
-            dmsLatitudeFrontTextField.text = "\(intDmmFrontLatitude!)"
-            dmsLongitudeFrontTextField.text = "\(intDmmFrontLongitude!)"
+        if let dmmFrontLatitude = dmmLatitudeFrontTextField.text,
+            let dmmBottomLatitude = dmmLatitudeBottomTextField.text,
+            let dmmFrontLongitude = dmmLongitudeFrontTextField.text,
+            let dmmBottomLongitude = dmmLongitudeBottomTextField.text,
+            let intDmmFrontLatitude = Int(dmmFrontLatitude),
+            let intDmmFrontLongitude = Int(dmmFrontLongitude),
+            let floatDmmBottomLatitude = Float(dmmBottomLatitude),
+            let floatDmmBottomLongitude = Float(dmmBottomLongitude)
+        {
+                
+            dmsLatitudeFrontTextField.text = "\(intDmmFrontLatitude)"
+            dmsLongitudeFrontTextField.text = "\(intDmmFrontLongitude)"
             
             //取整數經緯分顯示到dms
-            let intDmmBottomLatitude = Int(floatDmmBottomLatitude!)
-            let intDmmBottomLongitude = Int(floatDmmBottomLongitude!)
+            let intDmmBottomLatitude = Int(floatDmmBottomLatitude)
+            let intDmmBottomLongitude = Int(floatDmmBottomLongitude)
             
             print("intDmmBottomLatitude = \(intDmmBottomLatitude)", "intDmmBottomLongitude = \(intDmmBottomLongitude)")
             
@@ -121,8 +119,8 @@ class ViewController: UIViewController {
             dmsLongitudeMiddleTextField.text = "\(intDmmBottomLongitude)"
             
             //把DMM經緯分除60再跟DMM經緯度相加得出DD經緯度
-            let dmmLatitude = Float(intDmmFrontLatitude!) + floatDmmBottomLatitude! / 60
-            let dmmLongitude = Float(intDmmFrontLongitude!) + floatDmmBottomLongitude! / 60
+            let dmmLatitude = Float(intDmmFrontLatitude) + floatDmmBottomLatitude / 60
+            let dmmLongitude = Float(intDmmFrontLongitude) + floatDmmBottomLongitude / 60
             
             print("dmmLatitude = \(dmmLatitude)", "dmmLongitude = \(dmmLongitude)")
             
@@ -130,8 +128,8 @@ class ViewController: UIViewController {
             ddLongitudeTextField.text = "\(dmmLongitude)"
             
             //把DMM經緯分乘60得出經緯秒
-            let dmmLatitude2 = (floatDmmBottomLatitude! - Float(intDmmBottomLatitude)) * 60
-            let dmmLongitude2 = (floatDmmBottomLongitude! - Float(intDmmBottomLongitude)) * 60
+            let dmmLatitude2 = (floatDmmBottomLatitude - Float(intDmmBottomLatitude)) * 60
+            let dmmLongitude2 = (floatDmmBottomLongitude - Float(intDmmBottomLongitude)) * 60
             
             print("dmmLatitude2 = \(dmmLatitude2)", "dmmLongitude2 = \(dmmLongitude2)")
             
@@ -145,7 +143,7 @@ class ViewController: UIViewController {
             
         } else {
             
-            alert()
+            latitudeAndLongitudeNoTextAlert()
             
         }
         
@@ -155,27 +153,26 @@ class ViewController: UIViewController {
     
     @IBAction func convertDMS(_ sender: UIButton) {
         
-        let dmsLatitudeFront = dmsLatitudeFrontTextField.text!
-        let dmsLatitudeMiddle = dmsLatitudeMiddleTextField.text!
-        let dmsLatitudeBottom = dmsLatitudeBottomTextField.text!
-        let dmsLongitudeFront = dmsLongitudeFrontTextField.text!
-        let dmsLongitudeMiddle = dmsLongitudeMiddleTextField.text!
-        let dmsLongitudeBottm = dmsLongitudeBottomTextField.text!
-        let intDmsLatitudeFront = Int(dmsLatitudeFront)
-        let intDmsLatitudeMiddle = Int(dmsLatitudeMiddle)
-        let intDmsLongitudeFront = Int(dmsLongitudeFront)
-        let intDmsLongitudeMiddle = Int(dmsLongitudeMiddle)
-        let floatDmsLatitudeBottom = Float(dmsLatitudeBottom)
-        let floatDmsLongitudeBottm = Float(dmsLongitudeBottm)
-        
-        if intDmsLatitudeFront != nil, intDmsLatitudeMiddle != nil, floatDmsLatitudeBottom != nil, intDmsLongitudeFront != nil, intDmsLongitudeMiddle != nil, floatDmsLongitudeBottm != nil {
-            
-            dmmLatitudeFrontTextField.text = "\(intDmsLatitudeFront!)"
-            dmmLongitudeFrontTextField.text = "\(intDmsLongitudeFront!)"
+        if let dmsLatitudeFront = dmsLatitudeFrontTextField.text,
+            let dmsLatitudeMiddle = dmsLatitudeMiddleTextField.text,
+            let dmsLatitudeBottom = dmsLatitudeBottomTextField.text,
+            let dmsLongitudeFront = dmsLongitudeFrontTextField.text,
+            let dmsLongitudeMiddle = dmsLongitudeMiddleTextField.text,
+            let dmsLongitudeBottm = dmsLongitudeBottomTextField.text,
+            let intDmsLatitudeFront = Int(dmsLatitudeFront),
+            let intDmsLatitudeMiddle = Int(dmsLatitudeMiddle),
+            let intDmsLongitudeFront = Int(dmsLongitudeFront),
+            let intDmsLongitudeMiddle = Int(dmsLongitudeMiddle),
+            let floatDmsLatitudeBottom = Float(dmsLatitudeBottom),
+            let floatDmsLongitudeBottm = Float(dmsLongitudeBottm)
+        {
+
+            dmmLatitudeFrontTextField.text = "\(intDmsLatitudeFront)"
+            dmmLongitudeFrontTextField.text = "\(intDmsLongitudeFront)"
             
             //把dms經緯秒除以60加上dms經緯分得到dmm經緯分
-            let dmsLatitude = Float(intDmsLatitudeMiddle!) + floatDmsLatitudeBottom! / 60
-            let dmsLongituge = Float(intDmsLongitudeMiddle!) + floatDmsLongitudeBottm! / 60
+            let dmsLatitude = Float(intDmsLatitudeMiddle) + floatDmsLatitudeBottom / 60
+            let dmsLongituge = Float(intDmsLongitudeMiddle) + floatDmsLongitudeBottm / 60
             
             print("dmsLatitude = \(dmsLatitude)", "dmsLongituge = \(dmsLongituge)")
             
@@ -183,8 +180,8 @@ class ViewController: UIViewController {
             dmmLongitudeBottomTextField.text = String(format: "%.4f", dmsLongituge)
             
             //把dms經緯秒相加後的值再除以3600加上dms經緯分除以60再加上dms經緯度得到dd經緯度
-            let dmsLatitude2 = Float(intDmsLatitudeFront!) + Float(intDmsLatitudeMiddle!) / 60 + floatDmsLatitudeBottom! / 3600
-            let dmsLongitude2 = Float(intDmsLongitudeFront!) + Float(intDmsLongitudeMiddle!) / 60 + floatDmsLongitudeBottm! / 3600
+            let dmsLatitude2 = Float(intDmsLatitudeFront) + Float(intDmsLatitudeMiddle) / 60 + floatDmsLatitudeBottom / 3600
+            let dmsLongitude2 = Float(intDmsLongitudeFront) + Float(intDmsLongitudeMiddle) / 60 + floatDmsLongitudeBottm / 3600
             
             print("dmsLatitude2 = \(dmsLatitude2)", "dmsLongitude2 = \(dmsLongitude2)")
             
@@ -198,7 +195,7 @@ class ViewController: UIViewController {
                 
         } else {
             
-            alert()
+            latitudeAndLongitudeNoTextAlert()
             
         }
     
@@ -206,7 +203,7 @@ class ViewController: UIViewController {
 
     }
     
-    private func alert() {
+    private func latitudeAndLongitudeNoTextAlert() {
         
         let alertController = UIAlertController(title: "資料不完全", message: "請輸入需轉換的經緯度！", preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil)
@@ -217,14 +214,13 @@ class ViewController: UIViewController {
     
     @IBAction func mapAnnotation(_ sender: UIButton) {
         
-        let ddLatitude = ddLatitudeTextField.text!
-        let ddLongitude = ddLongitudeTextField.text!
-        let mapLatitde = Double(ddLatitude)
-        let mapLongitude = Double(ddLongitude)
-        
-        if mapLatitde != nil, mapLongitude != nil {
+        if let ddLatitude = ddLatitudeTextField.text,
+           let ddLongitude = ddLongitudeTextField.text,
+            let mapLatitde = Double(ddLatitude),
+            let mapLongitude = Double(ddLongitude)
+        {
             
-            mapMKMapView.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: mapLatitde!, longitude: mapLongitude!), latitudinalMeters: 1000, longitudinalMeters: 1000)
+            mapMKMapView.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: mapLatitde, longitude: mapLongitude), latitudinalMeters: 1000, longitudinalMeters: 1000)
             
             let annotation = mapAnnotationTextfield.text!
             //利用 MKPointAnnotation 產生地圖標記
@@ -232,7 +228,7 @@ class ViewController: UIViewController {
             
             mapAnnotation.title = "\(annotation)"
             //透過它的 coordinate 設定經緯度座標
-            mapAnnotation.coordinate = CLLocationCoordinate2D(latitude: mapLatitde!, longitude: mapLongitude!)
+            mapAnnotation.coordinate = CLLocationCoordinate2D(latitude: mapLatitde, longitude: mapLongitude)
             //加入mapMKMapView
             mapMKMapView.addAnnotation(mapAnnotation)
         } else {
